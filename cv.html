@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil CV</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="cv-container">
+        <h2>Hasil CV</h2>
+        <div id="cvDisplay">
+            <p><strong>Email:</strong> <span id="cvEmail"></span></p>
+            <p><strong>Nama:</strong> <span id="cvName"></span></p>
+            <p><strong>Tempat, Tanggal Lahir:</strong> <span id="cvDob"></span></p>
+            <p><strong>Riwayat Pendidikan:</strong></p>
+            <ul>
+                <li><strong>SD:</strong> <span id="cvSd"></span></li>
+                <li><strong>SMP:</strong> <span id="cvSmp"></span></li>
+                <li><strong>SMA:</strong> <span id="cvSma"></span></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        if (!localStorage.getItem("loggedIn")) {
+            window.location.href = "login.html"; // Redirect ke halaman login jika belum login
+        }
+
+        let cvData = JSON.parse(localStorage.getItem("cvData"));
+        if (cvData) {
+            document.getElementById("cvEmail").textContent = cvData.email;
+            document.getElementById("cvName").textContent = cvData.name;
+            document.getElementById("cvDob").textContent = cvData.dob;
+            document.getElementById("cvSd").textContent = cvData.sd;
+            document.getElementById("cvSmp").textContent = cvData.smp;
+            document.getElementById("cvSma").textContent = cvData.sma;
+        }
+    </script>
+</body>
+</html>

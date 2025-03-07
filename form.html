@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form CV</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="form-container">
+        <h2>Form Input CV</h2>
+        <form id="cvForm">
+            <label for="name">Nama:</label>
+            <input type="text" id="name" name="name" required placeholder="Masukkan nama"><br><br>
+
+            <label for="dob">Tempat, Tanggal Lahir:</label>
+            <input type="text" id="dob" name="dob" required placeholder="Masukkan tempat dan tanggal lahir"><br><br>
+
+            <label for="sd">Riwayat Pendidikan:</label><br>
+            <label>SD:</label>
+            <textarea id="sd" name="sd" required placeholder="Masukkan nama SD"></textarea><br><br>
+
+            <label>SMP:</label>
+            <textarea id="smp" name="smp" required placeholder="Masukkan nama SMP"></textarea><br><br>
+
+            <label>SMA:</label>
+            <textarea id="sma" name="sma" required placeholder="Masukkan nama SMA"></textarea><br><br>
+
+            <button type="submit">Simpan CV</button>
+        </form>
+    </div>
+
+    <script>
+        if (!localStorage.getItem("loggedIn")) {
+            window.location.href = "login.html"; // Redirect ke halaman login jika belum login
+        }
+
+        document.getElementById("cvForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value;
+            let dob = document.getElementById("dob").value;
+            let sd = document.getElementById("sd").value;
+            let smp = document.getElementById("smp").value;
+            let sma = document.getElementById("sma").value;
+            let email = localStorage.getItem("email");
+
+            // Simpan data CV ke localStorage
+            localStorage.setItem("cvData", JSON.stringify({ name, dob, sd, smp, sma, email }));
+
+            window.location.href = "cv.html"; // Redirect ke halaman hasil CV
+        });
+    </script>
+</body>
+</html>
