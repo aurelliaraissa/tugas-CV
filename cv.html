@@ -3,39 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hasil CV</title>
+    <title>Curriculum Vitae (CV)</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="cv-container">
-        <h2>Hasil CV</h2>
-        <div id="cvDisplay">
-            <p><strong>Email:</strong> <span id="cvEmail"></span></p>
-            <p><strong>Nama:</strong> <span id="cvName"></span></p>
-            <p><strong>Tempat, Tanggal Lahir:</strong> <span id="cvDob"></span></p>
-            <p><strong>Riwayat Pendidikan:</strong></p>
-            <ul>
-                <li><strong>SD:</strong> <span id="cvSd"></span></li>
-                <li><strong>SMP:</strong> <span id="cvSmp"></span></li>
-                <li><strong>SMA:</strong> <span id="cvSma"></span></li>
-            </ul>
+        <h1>Curriculum Vitae</h1>
+
+        <div class="cv-section">
+            <h2>Profil</h2>
+            <img id="foto" src="" alt="Foto Profil" style="max-width: 150px; border-radius: 50%;">
+            <p><strong>Nama:</strong> <span id="cv-nama"></span></p>
+            <p><strong>Tanggal Lahir:</strong> <span id="cv-ttl"></span></p>
+        </div>
+
+        <div class="cv-section">
+            <h2>Riwayat Pendidikan</h2>
+            <p><strong>SD:</strong> <span id="cv-sd"></span></p>
+            <p><strong>SMP:</strong> <span id="cv-smp"></span></p>
+            <p><strong>SMA:</strong> <span id="cv-sma"></span></p>
         </div>
     </div>
 
     <script>
-        if (!localStorage.getItem("loggedIn")) {
-            window.location.href = "login.html"; // Redirect ke halaman login jika belum login
-        }
-
-        let cvData = JSON.parse(localStorage.getItem("cvData"));
-        if (cvData) {
-            document.getElementById("cvEmail").textContent = cvData.email;
-            document.getElementById("cvName").textContent = cvData.name;
-            document.getElementById("cvDob").textContent = cvData.dob;
-            document.getElementById("cvSd").textContent = cvData.sd;
-            document.getElementById("cvSmp").textContent = cvData.smp;
-            document.getElementById("cvSma").textContent = cvData.sma;
-        }
+        
+        document.getElementById("cv-nama").textContent = localStorage.getItem("nama");
+        document.getElementById("cv-ttl").textContent = localStorage.getItem("ttl");
+        document.getElementById("cv-sd").textContent = localStorage.getItem("sd");
+        document.getElementById("cv-smp").textContent = localStorage.getItem("smp");
+        document.getElementById("cv-sma").textContent = localStorage.getItem("sma");
+        document.getElementById("foto").src = localStorage.getItem("foto");
     </script>
 </body>
 </html>
