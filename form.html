@@ -3,52 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Form CV</title>
+    <title>Form Data Diri</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="form-container">
-        <h2>Form Input CV</h2>
-        <form id="cvForm">
-            <label for="name">Nama:</label>
-            <input type="text" id="name" name="name" required placeholder="Masukkan nama"><br><br>
+        <form class="data-form" enctype="multipart/form-data">
+            <h2>Data Diri</h2>
 
-            <label for="dob">Tempat, Tanggal Lahir:</label>
-            <input type="text" id="dob" name="dob" required placeholder="Masukkan tempat dan tanggal lahir"><br><br>
+            <div class="input-group">
+                <label for="nama">Nama Lengkap</label>
+                <input type="text" id="nama" name="nama" required placeholder="Masukkan nama lengkap">
+            </div>
 
-            <label for="sd">Riwayat Pendidikan:</label><br>
-            <label>SD:</label>
-            <textarea id="sd" name="sd" required placeholder="Masukkan nama SD"></textarea><br><br>
+            <div class="input-group">
+                <label for="ttl">Tanggal Lahir</label>
+                <input type="date" id="ttl" name="ttl" required>
+            </div>
 
-            <label>SMP:</label>
-            <textarea id="smp" name="smp" required placeholder="Masukkan nama SMP"></textarea><br><br>
+            <div class="input-group">
+                <label for="sd">Riwayat Pendidikan SD</label>
+                <input type="text" id="sd" name="sd" required placeholder="Masukkan nama sekolah SD">
+            </div>
+            <div class="input-group">
+                <label for="smp">Riwayat Pendidikan SMP</label>
+                <input type="text" id="smp" name="smp" required placeholder="Masukkan nama sekolah SMP">
+            </div>
+            <div class="input-group">
+                <label for="sma">Riwayat Pendidikan SMA</label>
+                <input type="text" id="sma" name="sma" required placeholder="Masukkan nama sekolah SMA">
+            </div>
 
-            <label>SMA:</label>
-            <textarea id="sma" name="sma" required placeholder="Masukkan nama SMA"></textarea><br><br>
+            <div class="input-group">
+                <label for="foto">Upload Foto</label>
+                <input type="file" id="foto" name="foto" accept="image/*" required>
+            </div>
 
-            <button type="submit">Simpan CV</button>
+            <button type="submit" class="submit-btn">Kirim Data</button>
         </form>
     </div>
 
     <script>
-        if (!localStorage.getItem("loggedIn")) {
-            window.location.href = "login.html"; // Redirect ke halaman login jika belum login
-        }
-
-        document.getElementById("cvForm").addEventListener("submit", function(event) {
+        document.querySelector(".data-form").addEventListener("submit", function(event) {
             event.preventDefault();
 
-            let name = document.getElementById("name").value;
-            let dob = document.getElementById("dob").value;
-            let sd = document.getElementById("sd").value;
-            let smp = document.getElementById("smp").value;
-            let sma = document.getElementById("sma").value;
-            let email = localStorage.getItem("email");
+            const nama = document.getElementById("nama").value;
+            const ttl = document.getElementById("ttl").value;
+            const sd = document.getElementById("sd").value;
+            const smp = document.getElementById("smp").value;
+            const sma = document.getElementById("sma").value;
+            const foto = document.getElementById("foto").files[0];
 
-            // Simpan data CV ke localStorage
-            localStorage.setItem("cvData", JSON.stringify({ name, dob, sd, smp, sma, email }));
+            localStorage.setItem("nama", nama);
+            localStorage.setItem("ttl", ttl);
+            localStorage.setItem("sd", sd);
+            localStorage.setItem("smp", smp);
+            localStorage.setItem("sma", sma);
 
-            window.location.href = "cv.html"; // Redirect ke halaman hasil CV
+            const fotoURL = URL.createObjectURL(foto);
+            localStorage.setItem("foto", fotoURL);
+
+            window.location.href = "cv.html";
         });
     </script>
 </body>
